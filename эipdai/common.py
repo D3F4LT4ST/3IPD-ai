@@ -16,6 +16,6 @@ class Actions(IntEnum):
     C - Cooperate
     D - Defect
     '''
-    N = -1.
+    N = -1,
     C = 0,
     D = 1

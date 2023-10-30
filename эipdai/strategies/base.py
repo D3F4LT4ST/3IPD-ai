@@ -8,6 +8,7 @@ class Strategy(ABC):
     '''
     def __init__(self, name: str=None):
         self._name = name if name else self.__class__.__name__
+        self.reset()
 
     def __str__(self) -> str:
         return self._name
@@ -29,4 +30,4 @@ class Strategy(ABC):
         '''
 
     def reset(self):
-        pass
+        self._rounds_played = 0
