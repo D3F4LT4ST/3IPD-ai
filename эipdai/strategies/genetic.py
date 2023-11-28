@@ -1,7 +1,8 @@
 import random
+import itertools
 import numpy as np
 from .base import Strategy
-from ..common import Actions, N_OUTCOMES
+from ..common import Actions, N_OUTCOMES, N_PLAYERS
 from typing import List
 
 class GeneticStrategy(Strategy):
@@ -17,10 +18,10 @@ class GeneticStrategy(Strategy):
         self._memory_len = memory_len
 
         self._outcomes_coef = np.array([N_OUTCOMES**i for i in range(memory_len-1,-1,-1)])
-        self._moves_coef = np.array([2**i for i in range(0,memory_len)])
+        self._moves_coef = np.array([2**i for i in range(0,N_PLAYERS)])
 
         if genotype is None:
-            genotype_len = sum([N_OUTCOMES ** history_len for history_len in range(memory_len, -1, -1)])
+            genotype_len = sum([N_OUTCOMES ** i for i in range(memory_len, -1, -1)])
             self._genotype = [random.randint(Actions.C, Actions.D) for _ in range(genotype_len)]
         else:
             self._genotype = genotype
@@ -45,3 +46,16 @@ class GeneticStrategy(Strategy):
             gene_idx = 0
 
         return self._genotype[gene_idx]
+
+    def __str__(self) -> str:
+        return '\n'.join(list(map(
+            lambda gene: str(gene),
+            zip(
+                itertools.chain.from_iterable([['Start']] + [[
+                    list(map(lambda y: str(bin(int(y)))[2:].rjust(N_PLAYERS, '0'), list(str(oct(x))[2:].rjust(i, '0')))) 
+                        for x in list(range(N_OUTCOMES**i))
+                    ] for i in range(1,self._memory_len+1)
+                ]),
+                self._genotype
+            )
+        )))

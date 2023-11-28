@@ -8,9 +8,9 @@ class Strategy(ABC):
     '''
     def __init__(self, name: str=None):
         self._name = name if name else self.__class__.__name__
-        self.reset()
 
-    def __str__(self) -> str:
+    @property
+    def name(self):
         return self._name
 
     @abstractmethod
