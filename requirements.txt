@@ -1,0 +1,8 @@
+numpy
+gymnasium
+pettingzoo
+pygad
+tenacity
+langchain
+tqdm
+
