@@ -1,4 +1,4 @@
-## Exploration of AI strategies for 3IPD
+## Exploration of AI strategies for 3 player iterated prisoner's dilemma
 * Genetic strategy evolution with PyGAD: `notebooks/evolution_experiments.ipynb`
 * 🦜🔗 LangChain LLM strategy experiments: `notebooks/llm_experiments.ipynb`
 
